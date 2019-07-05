@@ -1,0 +1,57 @@
+svg
+{
+	border: 1px solid gray;
+}
+
+.spgraph
+{
+	margin: 50px;
+}
+
+.link
+{
+	stroke: hsl(348, 100%, 61%);
+	stroke-width: 2px;
+	opacity:1;
+}
+
+.bold
+{
+	stroke: hsl(141, 71%, 48%);
+	stroke-width: 5px;
+	opacity:1.0;
+}
+
+.label
+{
+	fill: #ff1f1f;
+	stroke: #d6c2c2;
+}
+
+.node
+{
+	fill: rgba(0, 0, 0, 0.7);
+	stroke: rgba(0, 0, 0, 0.7);
+}
+
+table.input
+{
+	margin: 20px 50px;
+}
+
+table.input td
+{
+	width: 50px;
+	text-align: center;
+}
+
+.is-hidden {
+	display: none;
+}
+
+select {
+	margin-top: 5px;
+}
+.drop {
+	margin: 0px 10px;
+}

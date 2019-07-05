@@ -1,0 +1,6 @@
+{"source": 0, "target": 1, "distance": 70}
+{"source": 0, "target": 2, "distance": 50}
+{"source": 1, "target": 3, "distance": 80}
+{"source": 2, "target": 3, "distance": 50}
+{"source": 3, "target": 4, "distance": 50}
+{"source": 4, "target": 5, "distance": 50}

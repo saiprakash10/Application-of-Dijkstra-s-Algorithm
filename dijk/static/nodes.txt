@@ -1,0 +1,6 @@
+{"index": 0, "value": "Perungalathur", "r": 15, "mx": 10, "my": 10}
+{"index": 1, "value": "Alapakkam", "r": 15, "mx": 90, "my": 50}
+{"index": 2, "value": "Vandalur", "r": 15, "mx": 10, "my": 120}
+{"index": 3, "value": "Kolappakam", "r": 15, "mx": 90, "my": 120}
+{"index": 4, "value": "Kandigai", "r": 15, "mx": 180, "my": 120}
+{"index": 5, "value": "VIT", "r": 15, "mx": 260, "my": 120}

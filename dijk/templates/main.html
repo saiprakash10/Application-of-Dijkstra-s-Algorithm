@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Dijkstra's Shortest Path</title>
+	{% load static %}
+	<link href="{% static 'css/pretty.css' %}" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+
+	<section class="hero is-dark">
+	  <div class="hero-body">
+	    <div class="container">
+	      <h1 class="title">Dijkstra's Shortest Path</h1>
+	      <h2 class="subtitle margin-none">Jagadeesh T ~ Sai Prakash ~ Sriram</h2>
+	      <h4 class="subtitle margin-none">DSA CSE 2003 PBL</h2>
+	      <h4 class="subtitle margin-none">Under Prof. Dr. M. Poongodi</h2>
+	    </div>
+	  </div>
+	</section>
+	<!--
+	<section class="hero is-light">
+	  <div class="hero-body">
+	    <div class="container">
+			<h1 class="title">Number of nodes</h1>
+			<h2 class="subtitle less-bottom-margin">From 1 to 20</h2>
+			<center>
+				<input class="input node-input is-large" type="number" id="numberOfNodes" name="sp-nodes" value="5"/>
+				<a class="button is-success is-large" onclick="ShortestPathUtils.makeTable(document.getElementById('numberOfNodes').value);">Make Table <i class="feather" data-feather="grid"></i></a>
+			</center>
+	    </div>
+	  </div>
+	</section> -->
+	<section class="hero is-hidden" id="dropy">
+		<div class="hero-body">
+			<center>
+			<div class="drop">
+				<span class="drop-text">From:</span>
+				<select id="fromselect" class="select"></select>
+				<span class="drop-text">To:</span>
+				<select id="toselect" class="select"></select>
+			</div>
+			<div class="submito">
+				<button class="button is-success" id="gooo">Find Route</button>
+			</div>
+		</center>
+		</div>
+	</section>
+
+	<section class="hero">
+	  <div class="hero-body">
+	    <div class="container">
+			<div id="distances"></div>
+			<div id="results"></div>
+			<div id="graph" class="spgraph" ></div>
+	    </div>
+	  </div>
+	</section>
+	
+	<link href="{% static 'css/shortest-path.css' %}" rel="stylesheet" type="text/css" />
+	
+	<script type="text/javascript" src="{% static 'js/d3.v3.min.js' %}"></script>
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/ShortestPathCalculator.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/ShortestPathUtils.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/feather.js' %}"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var is_complete = 0;
+			var nodes = new Array();
+			var paths = new Array();
+
+			var on_complete = function(source, target) {
+				if (is_complete < 3) return;
+				console.log("done reading files");
+				var sp1 = new ShortestPathCalculator(nodes, paths);
+				var route = sp1.findRoute(source, target);
+
+				var result = sp1.formatResult();
+
+				document.getElementById("results").innerHTML = result;
+
+				sp1.drawGraph("graph");
+			};
+
+			var draw_stuff = function() {
+				if(is_complete < 2) return;
+				console.log("start");
+				for(i=0;i<nodes.length;i++){
+					$("#fromselect").append(`<option value=${i}>${nodes[i].value}</option>`);
+					$("#toselect").append(`<option value=${i}>${nodes[i].value}</option>`);
+				}
+				$("#dropy").removeClass("is-hidden");
+				$("#gooo").click(function(){
+					is_complete++;
+					var source = $("#fromselect :selected").val();
+					var target = $("#toselect :selected").val();
+					console.log(source);
+					on_complete(source, target);
+				});
+			}
+
+			$.get("static/nodes.txt", function(data) {
+				arr = data.split("\n");
+				arr.forEach(function(element, index, array) {
+					nodes.push(JSON.parse(element));
+				});
+				console.log(nodes);
+				is_complete++;
+				on_complete();
+			});
+			$.get("static/paths.txt", function(data) {
+				arr = data.split("\n");
+				arr.forEach(function(element, index, array) {
+					paths.push(JSON.parse(element));
+				});
+				is_complete++;
+				draw_stuff();
+			});
+		});
+	</script>
+	{# (div.w3-row#row$>(div.w3-col.s1.w3-center#col$>p{$})*10)*5 #}
+</body>
+</html>
